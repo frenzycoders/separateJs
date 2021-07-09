@@ -1,0 +1,45 @@
+{
+  "name": "separatejs",
+  "version": "0.0.1",
+  "description": "Cli for node project",
+  "main": "index.js",
+  "licenses": [
+    {
+      "type": "MIT"
+    }
+  ],
+  "preferGlobal": true,
+  "bin": {
+    "separate": "index.js"
+  },
+  "engines": {
+    "node": ">=0.8.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "boxen": "4.0",
+    "chalk": "^4.1.1",
+    "child_process": "^1.0.2",
+    "cli-spinner": "^0.2.10",
+    "colors": "^0.6.2",
+    "commander": "^2.2.0",
+    "minimist": "^1.2.5",
+    "npm": "^7.19.1",
+    "npmlog": "^4.1.2",
+    "yargs": "^17.0.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ByteCode-Club/separateJs.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ByteCode-Club/separateJs/issues"
+  },
+  "homepage": "https://github.com/ByteCode-Club/separateJs#readme"
+}
