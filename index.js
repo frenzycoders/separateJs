@@ -26,7 +26,8 @@ yargs(hideBin(process.argv))
             projectDetails.name = pName;
             inputInterface.question(title + ' Add Description: '.green, (desc) => {
                 projectDetails.description = desc;
-                inputInterface.question(title + ' Are you want to add mongodb Connection[Y/N][N] ? ', (data) => {
+                inputInterface.question(title + ' Are you want to add mongodb Connection (Under developement)[Y/N][N] ? ', (data) => {
+                    data = 'n';
                     if (data == 'n' || data == 'N' || data == '') {
                         console.log(projectDetails);
                         utils.initProject(projectDetails, argv);
