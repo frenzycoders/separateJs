@@ -121,6 +121,7 @@ yargs(hideBin(process.argv))
             console.log(title + ' Setting up your route please wait.');
             console.log(title+' CRUD'.yellow+" Created successfully for route "+argv.route);
             console.log("Happy Coding".yellow)
+            process.exit(0);
         } else {
             if (fs.existsSync('./projectDetails.json')) {
                 if (!fs.existsSync('Routes/' + argv.route)) {

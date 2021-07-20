@@ -20,3 +20,10 @@ _separatejs_ helps developer to make api very quickly. This package provide sepa
     * (``` separate make <YourrouteName> ```)
     * This command will create full **CRUD** for your route without Database connection. You can write your logic for this route in (``` Routes/<YourrouteName>/<YourrouteName>.service.js```)
 
+## Keywords
+---
+
+``` separate new ```
+For Init new project.
+``` separate make <yourRouteName> ```
+Run this command inside your separate project directory. This will Create full **CRUD** routes for your project.
