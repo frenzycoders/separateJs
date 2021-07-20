@@ -6,5 +6,8 @@
     "isLocalDB":true,
     "dbUrl":"mongodb://localhost/",
     "dbName":"",
-    "isAuth":false
+    "isAuth":false,
+    "routes":[
+        "/"
+    ]
 }

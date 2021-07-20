@@ -74,6 +74,8 @@ class Utils {
             console.log("[" + "×".red + "]" + ' Project name already exist...'.red);
         }
     }
+
+    
 }
 const utils = new Utils();
 
