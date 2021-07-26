@@ -8,7 +8,7 @@ const inputInterface = readline.createInterface({
     output: process.stdout,
 })
 const fs = require('fs');
-const { exec } = require('child_process')
+const { exec, execSync } = require('child_process')
 const title = '[' + 'separate'.green + ']';
 const error = '[' + 'Error'.red + ']';
 let projectDetails = require('./projectDetails.json');
@@ -26,8 +26,7 @@ yargs(hideBin(process.argv))
             projectDetails.name = pName;
             inputInterface.question(title + ' Add Description: '.green, (desc) => {
                 projectDetails.description = desc;
-                inputInterface.question(title + ' Are you want to add mongodb Connection (Under developement)[Y/N][N] ? ', (data) => {
-                    data = 'n';
+                inputInterface.question(title + ' Are you want to add mongodb Connection[Y/N][N] ? ', (data) => {
                     if (data == 'n' || data == 'N' || data == '') {
                         console.log(projectDetails);
                         utils.initProject(projectDetails, argv);
@@ -46,10 +45,10 @@ yargs(hideBin(process.argv))
                                         inputInterface.question(title + " Do you want to add default login signup end-points[Y/N] [N] ?", (data) => {
                                             if (data == 'Y' || data == 'y') {
                                                 projectDetails.isAuth = true;
-                                                console.log(projectDetails);
+                                                utils.initProject(projectDetails);
                                             } else if (data == 'n' || data == 'N' || data == '') {
                                                 projectDetails.isAuth = false;
-                                                console.log(projectDetails);
+                                                utils.initProject(projectDetails);
                                             } else {
                                                 console.log(error + " [ Wrong Input try again. ]")
                                             }
@@ -64,10 +63,10 @@ yargs(hideBin(process.argv))
                                     inputInterface.question(title + " Do you want to add default login signup end-points[Y/N] [N] ?", (data) => {
                                         if (data == 'Y' || data == 'y') {
                                             projectDetails.isAuth = true;
-                                            console.log(projectDetails);
+                                            utils.initProject(projectDetails);
                                         } else if (data == 'n' || data == 'N' || data == '') {
                                             projectDetails.isAuth = false;
-                                            console.log(projectDetails);
+                                            utils.initProject(projectDetails);
                                         } else {
                                             console.log(error + " [ Wrong Input try again. ]")
                                         }
@@ -105,21 +104,19 @@ yargs(hideBin(process.argv))
             data = await dynamicRouteModel(argv.route);
             fs.writeFileSync('Routes/' + argv.route + '/' + argv.route + '.model.js', data);
             console.log(title + ' Model for your route ' + `${argv.route}`.yellow + ' created successfully... '.green + `${details.name}/` + 'Routes/' + argv.route + '/' + argv.route + '.controller.js');
-
-            exec('pwd', async (err, out, code) => {
-                if (err) throw err;
-                let projectDetails = require(`${out.split('\n')[0]}/projectDetails.json`);
-                projectDetails.routes.push(`/${argv.route}`);
-                fs.writeFileSync('./projectDetails.json', JSON.stringify(projectDetails));
-                let routes = [];
-                projectDetails.routes.map((e) => {
-                    if (e != '/') routes.push(e.replace('/', ''));
-                })
-                let data = await pathReConfig(routes);
-                fs.writeFileSync('./pathConfig.js',data);
-            });
+            let path = execSync('pwd');
+            let out = path.toString();
+            let projectDetails = require(`${out.split('\n')[0]}/projectDetails.json`);
+            projectDetails.routes.push(`/${argv.route}`);
+            fs.writeFileSync('./projectDetails.json', JSON.stringify(projectDetails));
+            let routes = [];
+            projectDetails.routes.map((e) => {
+                if (e != '/') routes.push(e.replace('/', ''));
+            })
+            data = await pathReConfig(routes);
+            fs.writeFileSync('./pathConfig.js', data);
             console.log(title + ' Setting up your route please wait.');
-            console.log(title+' CRUD'.yellow+" Created successfully for route "+argv.route);
+            console.log(title + ' CRUD'.yellow + " Created successfully for route " + argv.route);
             console.log("Happy Coding".yellow)
             process.exit(0);
         } else {
